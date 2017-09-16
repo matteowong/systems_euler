@@ -25,13 +25,15 @@ int sum_square_diff() {
   return squaresum*squaresum-sumsquare;
 }
 
-int fib_help(int a, int b, int max){
-  if (b<max) {
+int fib_help(int a, int b, int max, int ret){
+  if (b<=max) {
+    if (b%2==0)
+      ret+=b;
     a+=b;
-    return fib_help(b,a,max);
+    return fib_help(b,a,max,ret);
   }
   else
-    return b;
+    return ret;
 }
 
 
@@ -41,6 +43,7 @@ int main() {
   printf("Problem 1: %d\n",problem1);
   int problem6=sum_square_diff();
   printf("Problem 6: %d\n",problem6);
-  int problem2=0;
+  int problem2=fib_help(0,1,4000000,0);
+  printf("Problem 2: %d\n",problem2);
   return 0;
 }
