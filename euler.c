@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 int multiples_of_3_and_5() {
   int ret=0;
@@ -36,7 +37,46 @@ int fib_help(int a, int b, int max, int ret){
     return ret;
 }
 
+//0=prime, 1=not prime
+int is_prime(int a) {
+  if (a==2)
+    return 0;
+  else if (a%2==0)
+    return 1;
+  else {
+    int i=3;
+    while (i<=sqrt(a)) {
+      if (a%i==0){
+	return 1;
+      }
+      else 
+	i+=2;
+    }
+    return 0;
+  }
+}
 
+long sum_prime() {
+  long ret=0;
+  int i;
+  for (i=2;i<2000000;i+=1) {
+    if (is_prime(i)==0)
+      ret+=i;
+  }
+  return ret;
+}
+
+int thousand_one_prime() {
+  int prime=2;
+  int count=0;
+  while (count<10001) {
+    if (is_prime(prime)==0)
+      count+=1;
+    prime+=1;
+  }
+  prime-=1;
+  return prime;
+}
 
 int main() {
   int problem1=multiples_of_3_and_5();
@@ -45,5 +85,9 @@ int main() {
   printf("Problem 6: %d\n",problem6);
   int problem2=fib_help(0,1,4000000,0);
   printf("Problem 2: %d\n",problem2);
+  long problem10=sum_prime();
+  printf("Problem 10: %ld\n",problem10);
+  int problem7=thousand_one_prime();
+  printf("problem 7: %d\n",problem7);
   return 0;
 }
